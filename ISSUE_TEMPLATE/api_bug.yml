@@ -1,0 +1,226 @@
+name: 🔌 API Bug Report
+description: Report an issue with API endpoints or backend functionality
+title: "[API BUG] "
+labels: ["bug", "api", "backend"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting an API bug! Please provide detailed information to help us diagnose and fix the issue.
+
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of the API bug.
+      placeholder: Describe the API issue you're experiencing...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: affected-service
+    attributes:
+      label: Affected Service
+      description: Which QualZ service is experiencing the API issue?
+      options:
+        - Participant API (qualz-api)
+        - Customer API (qualz-customer-api)
+        - Analysis Service (qualz-analysis-service)
+        - Unknown/Multiple
+    validations:
+      required: true
+
+  - type: input
+    id: endpoint
+    attributes:
+      label: API Endpoint
+      description: Which API endpoint is affected?
+      placeholder: e.g., /api/v1/participants, /api/v1/studies, /api/v1/analysis/jobs
+    validations:
+      required: true
+
+  - type: dropdown
+    id: http-method
+    attributes:
+      label: HTTP Method
+      description: What HTTP method were you using?
+      options:
+        - GET
+        - POST
+        - PUT
+        - PATCH
+        - DELETE
+        - OPTIONS
+        - HEAD
+    validations:
+      required: true
+
+  - type: textarea
+    id: request-payload
+    attributes:
+      label: Request Payload
+      description: What data did you send in the request? (Remove sensitive information)
+      placeholder: |
+        {
+          "key": "value",
+          "example": "data"
+        }
+      render: json
+    validations:
+      required: false
+
+  - type: textarea
+    id: request-headers
+    attributes:
+      label: Request Headers
+      description: What headers did you include? (Remove authentication tokens)
+      placeholder: |
+        Content-Type: application/json
+        Accept: application/json
+        Authorization: [REDACTED]
+    validations:
+      required: false
+
+  - type: input
+    id: expected-status
+    attributes:
+      label: Expected Status Code
+      description: What HTTP status code did you expect?
+      placeholder: e.g., 200, 201, 204
+    validations:
+      required: true
+
+  - type: input
+    id: actual-status
+    attributes:
+      label: Actual Status Code
+      description: What HTTP status code did you receive?
+      placeholder: e.g., 500, 404, 400
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-response
+    attributes:
+      label: Expected Response
+      description: What response did you expect?
+      placeholder: Describe or show the expected response structure...
+      render: json
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual-response
+    attributes:
+      label: Actual Response
+      description: What response did you actually receive? (Remove sensitive data)
+      placeholder: |
+        {
+          "error": "Internal Server Error",
+          "message": "Something went wrong"
+        }
+      render: json
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: Detailed steps to reproduce the API issue
+      placeholder: |
+        1. Make a request to /api/endpoint with payload {...}
+        2. Include headers {...}
+        3. Observe the response
+        4. Expected vs actual result
+    validations:
+      required: true
+
+  - type: dropdown
+    id: frequency
+    attributes:
+      label: Frequency
+      description: How often does this issue occur?
+      options:
+        - Always (100%)
+        - Often (>75%)
+        - Sometimes (25-75%)
+        - Rarely (<25%)
+        - Once
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      description: How severe is this API bug?
+      options:
+        - Low - Minor inconvenience
+        - Medium - Affects functionality
+        - High - Blocks important features
+        - Critical - Service unavailable
+    validations:
+      required: true
+
+  - type: input
+    id: client-environment
+    attributes:
+      label: Client Environment
+      description: What environment is making the API call?
+      placeholder: e.g., Web Browser, Mobile App, Postman, curl, specific SDK
+    validations:
+      required: false
+
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Environment
+      description: Which environment did this occur in?
+      options:
+        - dev
+        - dev01
+        - staging
+        - production
+        - local
+    validations:
+      required: true
+
+  - type: textarea
+    id: error-logs
+    attributes:
+      label: Error Logs
+      description: Include any relevant server logs or error messages (remove sensitive information)
+      placeholder: Paste relevant logs here...
+      render: shell
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Add any other context about the problem here.
+      placeholder: |
+        - Related issues
+        - Workarounds tried
+        - Impact on users
+        - Any other relevant information
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Verification
+      description: Please verify the following
+      options:
+        - label: I have searched existing issues to ensure this bug hasn't been reported before
+          required: true
+        - label: I have removed all sensitive information (tokens, passwords, personal data) from this report
+          required: true
+        - label: I have included sufficient information to reproduce the issue
+          required: true
+        - label: I have tested this with the latest version available
+          required: false

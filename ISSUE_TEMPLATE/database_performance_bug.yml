@@ -1,0 +1,332 @@
+name: 🗄️ Database Performance Bug Report
+description: Report performance issues with MongoDB Atlas and database operations
+title: "[DATABASE PERF] "
+labels: ["bug", "database", "performance", "mongodb-atlas"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a database performance issue! This template is for MongoDB Atlas performance problems affecting the QualZ platform.
+
+  - type: textarea
+    id: db-performance-issue
+    attributes:
+      label: Database Performance Issue Description
+      description: Describe the database performance problem you're experiencing.
+      placeholder: Describe the MongoDB Atlas performance issue...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: performance-issue-type
+    attributes:
+      label: Performance Issue Type
+      description: What type of database performance issue is this?
+      options:
+        - Slow Query Performance
+        - High Connection Usage
+        - Connection Timeout Issues
+        - Index Performance Problems
+        - Write Operation Delays
+        - Read Operation Delays
+        - Connection Pool Exhaustion
+        - Transaction Lock Issues
+        - Memory/CPU Usage Spikes
+        - Disk I/O Bottlenecks
+        - Replication Lag
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: affected-service
+    attributes:
+      label: Affected Service
+      description: Which service is experiencing the database performance issue?
+      multiple: true
+      options:
+        - Participant API (qualz-api)
+        - Customer API (qualz-customer-api)
+        - Analysis Service (qualz-analysis-service)
+        - All Services
+    validations:
+      required: true
+
+  - type: dropdown
+    id: affected-operations
+    attributes:
+      label: Affected Database Operations
+      description: Which types of database operations are slow?
+      multiple: true
+      options:
+        - Participant Data Queries
+        - Study Configuration Reads
+        - Interview Response Writes
+        - Analysis Result Storage
+        - User Authentication Queries
+        - Aggregation Queries
+        - Bulk Insert Operations
+        - Index Lookups
+        - Collection Scans
+        - Transaction Operations
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: affected-collections
+    attributes:
+      label: Affected Collections
+      description: Which MongoDB collections are experiencing performance issues?
+      placeholder: e.g., participants, studies, interviews, analysis_results
+    validations:
+      required: false
+
+  - type: textarea
+    id: performance-metrics
+    attributes:
+      label: Performance Metrics
+      description: What performance metrics are you observing?
+      placeholder: |
+        MongoDB Atlas Metrics:
+        - Query execution time: 5.2 seconds (normally < 0.1s)
+        - Connection count: 475/500 limit
+        - Operations per second: 450/500 limit
+        - CPU usage: 85%
+        - Memory usage: 4.2GB/5GB
+        - Read latency: 150ms (normally 10ms)
+        - Write latency: 200ms (normally 15ms)
+        - Index hit ratio: 60% (normally 95%+)
+    validations:
+      required: true
+
+  - type: textarea
+    id: slow-queries
+    attributes:
+      label: Slow Queries
+      description: Include specific slow queries (remove sensitive data)
+      placeholder: |
+        // Query that's running slowly
+        db.participants.find({
+          study_id: "study_123",
+          status: "active",
+          created_at: { $gte: new Date("2024-01-01") }
+        }).sort({ created_at: -1 }).limit(100)
+
+        // Execution stats
+        - Execution time: 5.2 seconds
+        - Documents examined: 50000
+        - Documents returned: 100
+        - Index used: None (collection scan)
+      render: javascript
+    validations:
+      required: false
+
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Environment
+      description: Which environment is experiencing this issue?
+      options:
+        - dev
+        - dev01
+        - staging
+        - production
+        - local
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-performance
+    attributes:
+      label: Expected Performance
+      description: What database performance do you expect?
+      placeholder: |
+        - Query execution time: < 100ms
+        - Connection usage: < 300/500
+        - Operations per second: < 300/500
+        - Index hit ratio: > 95%
+        - Read/Write latency: < 20ms
+    validations:
+      required: true
+
+  - type: dropdown
+    id: load-conditions
+    attributes:
+      label: Load Conditions
+      description: Under what load conditions does this issue occur?
+      options:
+        - Light Load (< 100 concurrent users)
+        - Medium Load (100-1000 concurrent users)
+        - High Load (1000-3000 concurrent users)
+        - Peak Load (3000-6000 concurrent users)
+        - Stress Test Conditions
+        - Any Load Level
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: How can we reproduce this database performance issue?
+      placeholder: |
+        1. Configure load test with 2000 concurrent participant interviews
+        2. Run for 15 minutes to simulate peak usage
+        3. Monitor MongoDB Atlas performance metrics
+        4. Observe query performance degradation
+        5. Check connection pool usage
+    validations:
+      required: true
+
+  - type: dropdown
+    id: frequency
+    attributes:
+      label: Frequency
+      description: How often does this database performance issue occur?
+      options:
+        - Always (100%)
+        - During Peak Hours
+        - Under High Load
+        - Sometimes (25-75%)
+        - Rarely (<25%)
+        - Once
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      description: How severe is this database performance issue?
+      options:
+        - Low - Minor performance degradation
+        - Medium - Noticeable slowdown affecting user experience
+        - High - Significant performance issues blocking operations
+        - Critical - Database timeouts/failures, service unavailable
+    validations:
+      required: true
+
+  - type: textarea
+    id: mongodb-atlas-config
+    attributes:
+      label: MongoDB Atlas Configuration
+      description: Relevant database configuration details
+      placeholder: |
+        Cluster Configuration:
+        - Cluster tier: M30
+        - MongoDB version: 6.0
+        - Region: us-east-1
+        - Connection limit: 500
+        - Storage: 100GB SSD
+
+        Index Configuration:
+        - Collection: participants
+        - Indexes: study_id_1, status_1, created_at_1
+        - Missing indexes: compound index on study_id + status + created_at
+      render: yaml
+    validations:
+      required: false
+
+  - type: textarea
+    id: connection-patterns
+    attributes:
+      label: Connection Patterns
+      description: Database connection usage patterns from applications
+      placeholder: |
+        Connection Pool Configuration:
+        - Participant API: max 150 connections
+        - Customer API: max 100 connections
+        - Analysis Service: max 150 connections
+        - Connection timeout: 30 seconds
+        - Idle timeout: 10 minutes
+
+        Connection Usage:
+        - Peak concurrent connections: 450/500
+        - Average connection duration: 2.5 minutes
+        - Connection churn rate: 50 connections/minute
+    validations:
+      required: false
+
+  - type: textarea
+    id: error-logs
+    attributes:
+      label: Database Error Logs
+      description: Include relevant database errors and application logs
+      placeholder: |
+        MongoDB Atlas logs, application connection errors, timeout errors
+      render: shell
+    validations:
+      required: false
+
+  - type: textarea
+    id: impact-assessment
+    attributes:
+      label: Impact Assessment
+      description: What is the impact on the QualZ platform and users?
+      placeholder: |
+        - User-facing impact: interview timeouts, slow dashboard loading
+        - Service impact: API response times > 5 seconds
+        - Number of affected operations: ~1000/hour
+        - Business impact: customer complaints, incomplete interviews
+        - SLA impact: 95th percentile response time exceeded
+    validations:
+      required: false
+
+  - type: textarea
+    id: recent-changes
+    attributes:
+      label: Recent Changes
+      description: Any recent changes that might affect database performance
+      placeholder: |
+        - Database schema changes
+        - New indexes added/removed
+        - Application query pattern changes
+        - Data volume increases
+        - MongoDB Atlas configuration changes
+        - Application deployment changes
+    validations:
+      required: false
+
+  - type: textarea
+    id: optimization-attempts
+    attributes:
+      label: Optimization Attempts
+      description: Any database optimization attempts made
+      placeholder: |
+        - Added composite index on frequently queried fields
+        - Increased connection pool size
+        - Optimized query patterns
+        - Implemented query result caching
+        - Analyzed query performance with explain()
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Any additional context about the database performance issue
+      placeholder: |
+        - MongoDB Atlas performance insights
+        - Related performance issues
+        - Capacity planning considerations
+        - Migration or scaling plans
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Verification
+      description: Please verify the following
+      options:
+        - label: I have searched existing issues to ensure this database performance issue hasn't been reported before
+          required: true
+        - label: I have included relevant MongoDB Atlas metrics and performance data
+          required: true
+        - label: I have removed sensitive information (connection strings, actual data) from this report
+          required: true
+        - label: I have checked MongoDB Atlas Performance Advisor for optimization recommendations
+          required: false

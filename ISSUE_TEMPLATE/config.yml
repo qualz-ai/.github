@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📚 Documentation
+    url: https://github.com/QualZ/main_apps/qualz_docs_and_tests
+    about: Check our comprehensive platform documentation
+  - name: 💬 Discussions
+    url: https://github.com/QualZ/QualZ/discussions
+    about: Ask questions and discuss ideas with the community
+  - name: 🔒 Security Issues
+    url: https://github.com/QualZ/QualZ/security/advisories/new
+    about: Report security vulnerabilities privately

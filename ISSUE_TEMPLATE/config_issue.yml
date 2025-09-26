@@ -1,0 +1,237 @@
+name: 🔧 Configuration Issue
+description: Report an issue related to configuration, settings, or setup
+title: "[CONFIG] "
+labels: ["config", "setup", "configuration"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a configuration issue! Please provide detailed information to help us resolve the setup or configuration problem.
+
+  - type: textarea
+    id: issue-description
+    attributes:
+      label: Issue Description
+      description: A clear and concise description of the configuration issue.
+      placeholder: Describe the configuration problem you're experiencing...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: config-type
+    attributes:
+      label: Configuration Type
+      description: What type of configuration is affected?
+      multiple: true
+      options:
+        - Application Configuration
+        - Environment Variables (.env files)
+        - MongoDB Atlas Configuration
+        - Azure App Service Configuration
+        - Azure Static Web Apps Configuration
+        - Azure Service Bus Configuration
+        - Azure Container Registry Configuration
+        - GitHub Actions CI/CD Configuration
+        - FastAPI Configuration
+        - React Build Configuration
+        - Authentication Configuration
+        - LLM Service Configuration
+        - Logging Configuration
+        - Third-party Integration Configuration
+        - Docker Configuration
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: config-files
+    attributes:
+      label: Configuration Files Involved
+      description: Which configuration files are related to this issue?
+      placeholder: e.g., config.yml, .env, docker-compose.yml, package.json
+    validations:
+      required: false
+
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Environment
+      description: Which environment is affected?
+      multiple: true
+      options:
+        - dev
+        - dev01
+        - staging
+        - production
+        - local
+        - CI/CD Pipeline
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: How can we reproduce this configuration issue?
+      placeholder: |
+        1. Set up environment with configuration X
+        2. Run command Y
+        3. Observe error Z
+        4. Expected behavior vs actual behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: current-config
+    attributes:
+      label: Current Configuration
+      description: Show the current configuration that's causing issues (remove sensitive values)
+      placeholder: |
+        # config.yml
+        database:
+          host: localhost
+          port: 5432
+          name: qualz_db
+          # password: [REDACTED]
+      render: yaml
+    validations:
+      required: false
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected Behavior
+      description: What should happen with this configuration?
+      placeholder: Describe what should work with this configuration...
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual-behavior
+    attributes:
+      label: Actual Behavior
+      description: What actually happens instead?
+      placeholder: Describe what actually happens (error messages, unexpected behavior, etc.)...
+    validations:
+      required: true
+
+  - type: textarea
+    id: error-messages
+    attributes:
+      label: Error Messages
+      description: Include any error messages or logs related to the configuration issue
+      placeholder: Paste error messages here...
+      render: shell
+    validations:
+      required: false
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      description: How severe is this configuration issue?
+      options:
+        - Low - Minor inconvenience or optional feature
+        - Medium - Affects development workflow
+        - High - Blocks deployment or critical functionality
+        - Critical - Prevents application from starting
+    validations:
+      required: true
+
+  - type: textarea
+    id: system-info
+    attributes:
+      label: System Information
+      description: Relevant system/environment information
+      placeholder: |
+        - OS: Ubuntu 20.04 / macOS 12.0 / Windows 11
+        - Node.js: v16.14.0
+        - Docker: 20.10.12
+        - Kubernetes: v1.21.0
+        - Cloud Provider: AWS/GCP/Azure
+        - Any other relevant versions
+    validations:
+      required: false
+
+  - type: textarea
+    id: attempted-solutions
+    attributes:
+      label: Attempted Solutions
+      description: What have you tried to fix this configuration issue?
+      placeholder: |
+        - Tried different configuration values
+        - Checked documentation
+        - Searched online forums
+        - Consulted with team members
+        - etc.
+    validations:
+      required: false
+
+  - type: textarea
+    id: working-config
+    attributes:
+      label: Working Configuration (if known)
+      description: If you know of a configuration that works, please share it (remove sensitive values)
+      placeholder: |
+        # working-config.yml
+        service:
+          setting1: value1
+          setting2: value2
+      render: yaml
+    validations:
+      required: false
+
+  - type: textarea
+    id: documentation-gap
+    attributes:
+      label: Documentation Gap
+      description: Is this issue related to missing or unclear documentation?
+      placeholder: |
+        - Missing configuration options in docs
+        - Unclear setup instructions
+        - Outdated examples
+        - Missing troubleshooting section
+    validations:
+      required: false
+
+  - type: dropdown
+    id: urgency
+    attributes:
+      label: Urgency
+      description: How urgently do you need this resolved?
+      options:
+        - Low - Can work around it
+        - Medium - Affects productivity
+        - High - Blocking progress
+        - Critical - Production issue
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Add any other context about the configuration issue.
+      placeholder: |
+        - Recent changes made
+        - Related configuration that works
+        - Impact on team/users
+        - Any other relevant information
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Verification
+      description: Please verify the following
+      options:
+        - label: I have searched existing issues to ensure this configuration issue hasn't been reported before
+          required: true
+        - label: I have removed all sensitive information (passwords, tokens, API keys) from configuration examples
+          required: true
+        - label: I have checked the documentation for this configuration
+          required: true
+        - label: I have tried basic troubleshooting steps (restart, clear cache, etc.)
+          required: false

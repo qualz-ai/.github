@@ -1,0 +1,280 @@
+name: 📊 Analysis Job Bug Report
+description: Report issues with long-running analysis tasks and job processing
+title: "[ANALYSIS JOB] "
+labels: ["bug", "analysis", "jobs", "qualz-analysis-service"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting an analysis job issue! This template is for problems with long-running analysis tasks in the QualZ Analysis Service.
+
+  - type: textarea
+    id: job-issue
+    attributes:
+      label: Analysis Job Issue Description
+      description: Describe the analysis job problem you're experiencing.
+      placeholder: Describe the issue with the analysis job processing...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: job-issue-type
+    attributes:
+      label: Job Issue Type
+      description: What type of analysis job issue is this?
+      options:
+        - Job Failed to Start
+        - Job Stuck/Hanging
+        - Job Failed During Processing
+        - Job Completed with Errors
+        - Job Taking Too Long
+        - Job Results Missing/Incomplete
+        - Job Status Not Updated
+        - Multiple Jobs Failing
+        - Resource Exhaustion
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: job-id
+    attributes:
+      label: Job ID/Reference
+      description: Specific job ID or reference number if available
+      placeholder: e.g., job_abc123, analysis_xyz789
+    validations:
+      required: false
+
+  - type: dropdown
+    id: analysis-type
+    attributes:
+      label: Analysis Type
+      description: What type of analysis was being performed?
+      options:
+        - Participant Interview Analysis
+        - Survey Response Analysis
+        - Sentiment Analysis
+        - Theme Extraction
+        - Statistical Analysis
+        - Report Generation
+        - Data Export
+        - Custom Analysis
+        - Unknown
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: data-volume
+    attributes:
+      label: Data Volume
+      description: How much data was being processed?
+      placeholder: e.g., 500 interviews, 10MB dataset, 1000 responses
+    validations:
+      required: false
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected Behavior
+      description: What should happen with this analysis job?
+      placeholder: |
+        - Job should complete within 15 minutes
+        - Analysis results should be available in Customer API
+        - Customer should receive completion notification
+        - Results should include sentiment scores and themes
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual-behavior
+    attributes:
+      label: Actual Behavior
+      description: What is actually happening with the analysis job?
+      placeholder: |
+        - Job has been running for 2 hours without completion
+        - Job failed with error message "X"
+        - No results returned to Customer API
+        - Job status stuck at "Processing"
+    validations:
+      required: true
+
+  - type: input
+    id: job-duration
+    attributes:
+      label: Job Duration
+      description: How long has the job been running or how long did it take to fail?
+      placeholder: e.g., 45 minutes, 2 hours, Failed after 5 minutes
+    validations:
+      required: false
+
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Environment
+      description: Which environment is experiencing this issue?
+      options:
+        - dev
+        - dev01
+        - staging
+        - production
+        - local
+    validations:
+      required: true
+
+  - type: textarea
+    id: job-configuration
+    attributes:
+      label: Job Configuration
+      description: Analysis job configuration details (remove sensitive data)
+      placeholder: |
+        {
+          "study_id": "study_123",
+          "analysis_type": "sentiment_analysis",
+          "participants": 150,
+          "interview_duration": "15_minutes",
+          "language": "en",
+          "custom_parameters": {
+            "theme_extraction": true,
+            "sentiment_threshold": 0.7
+          }
+        }
+      render: json
+    validations:
+      required: false
+
+  - type: textarea
+    id: error-logs
+    attributes:
+      label: Error Logs & Stack Traces
+      description: Include relevant error logs from Analysis Service (remove sensitive data)
+      placeholder: |
+        Analysis Service logs, error messages, stack traces
+      render: shell
+    validations:
+      required: false
+
+  - type: dropdown
+    id: frequency
+    attributes:
+      label: Frequency
+      description: How often does this analysis job issue occur?
+      options:
+        - Always (100%)
+        - Often (>75%)
+        - Sometimes (25-75%)
+        - Rarely (<25%)
+        - Once
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      description: How severe is this analysis job issue?
+      options:
+        - Low - Minor delay or non-critical analysis
+        - Medium - Delayed results affecting customer workflow
+        - High - Analysis jobs failing, blocking customer operations
+        - Critical - All analysis jobs failing, service unavailable
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: How can we reproduce this analysis job issue?
+      placeholder: |
+        1. Create study with 150 participants in Customer API
+        2. Configure analysis parameters: sentiment analysis + theme extraction
+        3. Trigger analysis job from customer dashboard
+        4. Monitor job status in Analysis Service
+        5. Observe job failure/issue at step X
+    validations:
+      required: true
+
+  - type: textarea
+    id: system-resources
+    attributes:
+      label: System Resources During Job
+      description: System resource usage during the analysis job
+      placeholder: |
+        Analysis Service (Azure App Service B1):
+        - CPU usage: 95%
+        - Memory usage: 900MB/1.75GB
+        - Processing time per record: 500ms
+        - Database connections: 25
+        - LLM API calls: 1500 (rate limited?)
+    validations:
+      required: false
+
+  - type: textarea
+    id: job-dependencies
+    attributes:
+      label: Job Dependencies
+      description: External dependencies and integrations used by the job
+      placeholder: |
+        - MongoDB Atlas: participant interview data
+        - LLM Service: OpenAI/Azure OpenAI API
+        - Azure Service Bus: job messaging
+        - External APIs: [if any]
+    validations:
+      required: false
+
+  - type: textarea
+    id: customer-impact
+    attributes:
+      label: Customer Impact
+      description: Impact on customers and their workflow
+      placeholder: |
+        - Customer waiting for study results
+        - Study completion blocked
+        - Impact on customer timeline/business decisions
+        - Number of affected customers
+    validations:
+      required: false
+
+  - type: textarea
+    id: workaround
+    attributes:
+      label: Workaround Applied
+      description: Any workarounds or manual interventions applied?
+      placeholder: |
+        - Restarted Analysis Service
+        - Reduced job batch size
+        - Manually triggered job processing
+        - Used alternative analysis method
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Any additional context about the analysis job issue
+      placeholder: |
+        - Recent code deployments to Analysis Service
+        - Changes in analysis algorithms
+        - LLM API rate limits or issues
+        - Database performance impacts
+        - Similar issues with other studies
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Verification
+      description: Please verify the following
+      options:
+        - label: I have searched existing issues to ensure this analysis job issue hasn't been reported before
+          required: true
+        - label: I have included relevant job configuration and error logs (with sensitive data removed)
+          required: true
+        - label: I have checked Analysis Service logs and system resources
+          required: true
+        - label: I have documented the customer impact and urgency
+          required: false

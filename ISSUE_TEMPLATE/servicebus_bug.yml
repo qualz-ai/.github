@@ -1,0 +1,260 @@
+name: 📨 Azure Service Bus Bug Report
+description: Report issues with Azure Service Bus messaging and async communication
+title: "[SERVICE BUS] "
+labels: ["bug", "azure-service-bus", "messaging", "async"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting an Azure Service Bus issue! This template is for problems related to message queuing, async communication between Customer API and Analysis Service.
+
+  - type: textarea
+    id: servicebus-issue
+    attributes:
+      label: Service Bus Issue Description
+      description: Describe the Azure Service Bus problem you're experiencing.
+      placeholder: Describe the messaging or async communication issue...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: issue-type
+    attributes:
+      label: Issue Type
+      description: What type of Service Bus issue is this?
+      options:
+        - Message Not Delivered
+        - Message Delivery Delayed
+        - Dead Letter Queue Issues
+        - Connection Problems
+        - Authentication/Authorization Issues
+        - Message Processing Errors
+        - Queue/Topic Configuration Issues
+        - Message Serialization/Deserialization
+        - Performance/Throughput Issues
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: affected-communication
+    attributes:
+      label: Affected Service Communication
+      description: Which service communication is affected?
+      options:
+        - Customer API → Analysis Service
+        - Analysis Service → Customer API
+        - Multiple Services
+        - Unknown
+    validations:
+      required: true
+
+  - type: input
+    id: queue-topic-name
+    attributes:
+      label: Queue/Topic Name
+      description: Which specific queue or topic is experiencing issues?
+      placeholder: e.g., analysis-jobs, customer-notifications
+    validations:
+      required: false
+
+  - type: textarea
+    id: message-details
+    attributes:
+      label: Message Details
+      description: Details about the message(s) that are having issues (remove sensitive data)
+      placeholder: |
+        Message Type: AnalysisJobRequest
+        Message Size: ~5KB
+        Message ID: abc123...
+        Correlation ID: xyz789...
+        Expected Processing Time: 2 minutes
+        Custom Properties: [list any custom properties]
+      render: yaml
+    validations:
+      required: false
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected Behavior
+      description: What should happen with the Service Bus communication?
+      placeholder: |
+        - Message should be delivered within 30 seconds
+        - Analysis job should start processing immediately
+        - Completion message should be sent back to Customer API
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual-behavior
+    attributes:
+      label: Actual Behavior
+      description: What is actually happening?
+      placeholder: |
+        - Messages are stuck in the queue for 10+ minutes
+        - Dead letter queue is accumulating messages
+        - No response received from Analysis Service
+    validations:
+      required: true
+
+  - type: dropdown
+    id: frequency
+    attributes:
+      label: Frequency
+      description: How often does this Service Bus issue occur?
+      options:
+        - Always (100%)
+        - Often (>75%)
+        - Sometimes (25-75%)
+        - Rarely (<25%)
+        - Once
+    validations:
+      required: true
+
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Environment
+      description: Which environment is experiencing this issue?
+      options:
+        - dev
+        - dev01
+        - staging
+        - production
+        - local
+    validations:
+      required: true
+
+  - type: textarea
+    id: servicebus-metrics
+    attributes:
+      label: Service Bus Metrics
+      description: Relevant Azure Service Bus metrics from Azure Portal
+      placeholder: |
+        Queue/Topic Metrics:
+        - Active message count: 150
+        - Dead letter count: 25
+        - Incoming messages: 500/hour
+        - Outgoing messages: 475/hour
+        - Message processing time: 2.5 minutes average
+        - Connection count: 5
+      render: yaml
+    validations:
+      required: false
+
+  - type: textarea
+    id: error-messages
+    attributes:
+      label: Error Messages & Logs
+      description: Include Service Bus error messages and relevant application logs
+      placeholder: |
+        Service Bus errors, application logs from Customer API and Analysis Service
+      render: shell
+    validations:
+      required: false
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      description: How severe is this Service Bus issue?
+      options:
+        - Low - Minor delay in message processing
+        - Medium - Noticeable impact on async operations
+        - High - Significant delays affecting user experience
+        - Critical - Messages not being processed, system blocking
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: How can we reproduce this Service Bus issue?
+      placeholder: |
+        1. Trigger analysis job from Customer API
+        2. Monitor Service Bus queue in Azure Portal
+        3. Check Analysis Service logs for message processing
+        4. Observe issue with message delivery/processing
+    validations:
+      required: true
+
+  - type: textarea
+    id: azure-servicebus-config
+    attributes:
+      label: Service Bus Configuration
+      description: Relevant Service Bus configuration (remove sensitive connection strings)
+      placeholder: |
+        # Service Bus Configuration
+        queue:
+          name: analysis-jobs
+          max_delivery_count: 10
+          message_ttl: 14_days
+          lock_duration: 5_minutes
+          enable_dead_lettering: true
+          enable_sessions: false
+
+        connection:
+          # connection_string: [REDACTED]
+          retry_policy: exponential
+          max_retries: 3
+      render: yaml
+    validations:
+      required: false
+
+  - type: textarea
+    id: message-flow
+    attributes:
+      label: Message Flow Context
+      description: Describe the full message flow and where the issue occurs
+      placeholder: |
+        1. Customer creates study in Customer API
+        2. Customer API sends AnalysisJobRequest to Service Bus
+        3. Analysis Service receives and processes message
+        4. Analysis Service sends completion notification back
+        5. [Issue occurs at step X]
+    validations:
+      required: true
+
+  - type: textarea
+    id: impact-assessment
+    attributes:
+      label: Impact Assessment
+      description: What is the impact on the QualZ platform and users?
+      placeholder: |
+        - Analysis jobs are delayed by X minutes/hours
+        - Customers are not receiving study results
+        - Number of affected analysis requests: ~50
+        - Impact on customer workflow
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Any additional context about the Service Bus issue
+      placeholder: |
+        - Recent Service Bus configuration changes
+        - Related infrastructure changes
+        - Pattern of when issues occur (time of day, load conditions)
+        - Workarounds tried
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Verification
+      description: Please verify the following
+      options:
+        - label: I have searched existing issues to ensure this Service Bus issue hasn't been reported before
+          required: true
+        - label: I have removed sensitive information (connection strings, API keys) from this report
+          required: true
+        - label: I have checked Azure Service Bus metrics and logs
+          required: true
+        - label: I have verified the issue affects the async communication between Customer API and Analysis Service
+          required: false

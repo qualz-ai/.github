@@ -1,0 +1,252 @@
+name: ⚙️ Service Bug Report
+description: Report an issue with background services, processes, or infrastructure
+title: "[SERVICE BUG] "
+labels: ["bug", "service", "infrastructure"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a service bug! Please provide detailed information about the service issue you're experiencing.
+
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of the service bug.
+      placeholder: Describe the service issue you're experiencing...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: affected-service
+    attributes:
+      label: Affected Service
+      description: Which service is experiencing issues?
+      multiple: true
+      options:
+        - Participant API (qualz-api)
+        - Customer API (qualz-customer-api)
+        - Analysis Service (qualz-analysis-service)
+        - Participant UI (chatbot_ui)
+        - Customer UI (qualz_study)
+        - MongoDB Atlas Database
+        - Azure Service Bus
+        - Azure App Service
+        - Azure Static Web Apps
+        - Logging Service (qualz-customer-monitoring-service)
+        - LLM Service
+        - Authentication Service
+        - Third-party Integration
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: service-name
+    attributes:
+      label: Specific Service Name
+      description: If "Other" or need to be more specific, provide the exact service name
+      placeholder: e.g., user-auth-service, analytics-processor
+    validations:
+      required: false
+
+  - type: textarea
+    id: symptoms
+    attributes:
+      label: Symptoms
+      description: What symptoms are you observing?
+      placeholder: |
+        - High CPU usage
+        - Memory leaks
+        - Connection timeouts
+        - Service crashes
+        - Performance degradation
+        - etc.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: How can we reproduce this service issue?
+      placeholder: |
+        1. Start the service with configuration X
+        2. Send requests of type Y
+        3. Monitor for Z minutes
+        4. Observe the issue
+    validations:
+      required: true
+
+  - type: dropdown
+    id: frequency
+    attributes:
+      label: Frequency
+      description: How often does this service issue occur?
+      options:
+        - Always (100%)
+        - Often (>75%)
+        - Sometimes (25-75%)
+        - Rarely (<25%)
+        - Once
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      description: How severe is this service issue?
+      options:
+        - Low - Minor impact on performance
+        - Medium - Noticeable performance degradation
+        - High - Service partially unavailable
+        - Critical - Service completely down
+    validations:
+      required: true
+
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Environment
+      description: Which environment is affected?
+      multiple: true
+      options:
+        - dev
+        - dev01
+        - staging
+        - production
+        - local
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected Behavior
+      description: What should the service be doing instead?
+      placeholder: Describe the expected service behavior...
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual-behavior
+    attributes:
+      label: Actual Behavior
+      description: What is the service actually doing?
+      placeholder: Describe what the service is actually doing...
+    validations:
+      required: true
+
+  - type: textarea
+    id: error-logs
+    attributes:
+      label: Error Logs
+      description: Include relevant service logs, stack traces, or error messages (remove sensitive information)
+      placeholder: Paste relevant logs here...
+      render: shell
+    validations:
+      required: false
+
+  - type: textarea
+    id: system-metrics
+    attributes:
+      label: System Metrics
+      description: Include any relevant system metrics (CPU, memory, disk, network usage)
+      placeholder: |
+        CPU usage: 85%
+        Memory usage: 12GB/16GB
+        Disk I/O: High
+        Network: Normal
+    validations:
+      required: false
+
+  - type: textarea
+    id: configuration
+    attributes:
+      label: Service Configuration
+      description: Relevant configuration settings (remove sensitive values)
+      placeholder: |
+        # configuration.yml
+        service:
+          timeout: 30s
+          max_connections: 100
+          # etc.
+      render: yaml
+    validations:
+      required: false
+
+  - type: input
+    id: service-version
+    attributes:
+      label: Service Version
+      description: What version of the service is running?
+      placeholder: e.g., v1.2.3, commit hash, Docker image tag
+    validations:
+      required: false
+
+  - type: textarea
+    id: infrastructure-details
+    attributes:
+      label: Infrastructure Details
+      description: Relevant infrastructure information
+      placeholder: |
+        - OS: Linux (Azure App Service)
+        - Container: Docker via Azure Container Registry
+        - Cloud Provider: Microsoft Azure
+        - App Service Plan: B1/B3 tier
+        - Azure Region: East US 2
+        - MongoDB Atlas: Shared cluster
+    validations:
+      required: false
+
+  - type: textarea
+    id: impact-assessment
+    attributes:
+      label: Impact Assessment
+      description: What is the impact on users or other services?
+      placeholder: |
+        - Number of affected users
+        - Downstream services impacted
+        - Business impact
+        - Revenue/operational impact
+    validations:
+      required: false
+
+  - type: textarea
+    id: workaround
+    attributes:
+      label: Workaround
+      description: Any temporary workarounds or mitigation steps taken?
+      placeholder: Describe any workarounds applied...
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Add any other context about the service issue.
+      placeholder: |
+        - Recent changes or deployments
+        - Related incidents
+        - Monitoring alerts
+        - Any other relevant information
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Verification
+      description: Please verify the following
+      options:
+        - label: I have searched existing issues to ensure this bug hasn't been reported before
+          required: true
+        - label: I have removed all sensitive information (credentials, tokens, personal data) from logs and configurations
+          required: true
+        - label: I have included relevant logs and metrics to help diagnose the issue
+          required: true
+        - label: I have documented the impact and any workarounds applied
+          required: false

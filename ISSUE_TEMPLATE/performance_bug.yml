@@ -1,0 +1,240 @@
+name: 🚀 Performance Bug Report
+description: Report performance issues, load testing failures, or scalability problems
+title: "[PERFORMANCE] "
+labels: ["bug", "performance", "load-testing"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a performance issue! This template is specifically for performance, scalability, and load testing related problems in the QualZ platform.
+
+  - type: textarea
+    id: performance-issue
+    attributes:
+      label: Performance Issue Description
+      description: Describe the performance problem you're experiencing.
+      placeholder: Describe the performance issue in detail...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: performance-type
+    attributes:
+      label: Performance Issue Type
+      description: What type of performance issue is this?
+      options:
+        - High Response Time
+        - Low Throughput
+        - Resource Usage (CPU/Memory)
+        - Timeout Issues
+        - Concurrent User Limit
+        - Database Performance
+        - Load Testing Failure
+        - Scalability Issue
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: affected-component
+    attributes:
+      label: Affected Component
+      description: Which component is experiencing performance issues?
+      multiple: true
+      options:
+        - Participant API (qualz-api)
+        - Customer API (qualz-customer-api)
+        - Analysis Service (qualz-analysis-service)
+        - Participant UI (chatbot_ui)
+        - Customer UI (qualz_study)
+        - MongoDB Atlas Database
+        - Azure Service Bus
+        - Azure App Service
+        - Azure Static Web Apps
+        - LLM Service
+        - Overall System
+    validations:
+      required: true
+
+  - type: input
+    id: concurrent-users
+    attributes:
+      label: Concurrent Users/Load
+      description: How many concurrent users or what load was the system under?
+      placeholder: e.g., 100 concurrent interviews, 1000 API requests/min, 6000 concurrent participants
+    validations:
+      required: false
+
+  - type: textarea
+    id: performance-metrics
+    attributes:
+      label: Performance Metrics
+      description: What performance metrics did you observe?
+      placeholder: |
+        - Response time: 5.2 seconds (expected < 1s)
+        - Throughput: 50 req/sec (expected 200 req/sec)
+        - CPU usage: 95%
+        - Memory usage: 14GB/16GB
+        - Error rate: 15%
+        - Database connections: 450/500
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-performance
+    attributes:
+      label: Expected Performance
+      description: What performance did you expect?
+      placeholder: |
+        - Response time: < 1 second
+        - Support for 6000 concurrent interviews
+        - Error rate: < 1%
+        - 95th percentile response time: < 2 seconds
+    validations:
+      required: true
+
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Environment
+      description: Which environment did this occur in?
+      options:
+        - dev
+        - dev01
+        - staging
+        - production
+        - local
+        - load-testing
+    validations:
+      required: true
+
+  - type: textarea
+    id: load-test-details
+    attributes:
+      label: Load Test Details
+      description: If this is related to load testing, provide test configuration details
+      placeholder: |
+        - Load testing tool: Artillery/K6/JMeter
+        - Test duration: 15 minutes
+        - Ramp-up pattern: 0 to 6000 users over 5 minutes
+        - Test scenarios: Participant interviews, customer dashboard access
+        - Load balancer configuration: [if applicable]
+      render: yaml
+    validations:
+      required: false
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: How can we reproduce this performance issue?
+      placeholder: |
+        1. Configure load test with X concurrent users
+        2. Run participant interview simulation for Y minutes
+        3. Monitor response times and error rates
+        4. Observe performance degradation at Z threshold
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      description: How severe is this performance issue?
+      options:
+        - Low - Minor performance degradation
+        - Medium - Noticeable impact on user experience
+        - High - Significant performance issues affecting functionality
+        - Critical - System unable to handle target load (6000 concurrent users)
+    validations:
+      required: true
+
+  - type: textarea
+    id: error-logs
+    attributes:
+      label: Error Logs & Monitoring Data
+      description: Include relevant logs, monitoring data, or error messages
+      placeholder: |
+        Application logs, Azure Application Insights data, MongoDB Atlas metrics, etc.
+      render: shell
+    validations:
+      required: false
+
+  - type: textarea
+    id: system-resources
+    attributes:
+      label: System Resources
+      description: System resource usage during the issue
+      placeholder: |
+        Azure App Service:
+        - CPU usage: 85%
+        - Memory usage: 12GB/16GB
+        - Network I/O: 50 Mbps
+
+        MongoDB Atlas:
+        - Connections: 450/500
+        - Operations/sec: 400/500 limit
+        - Read/Write latency: 50ms average
+    validations:
+      required: false
+
+  - type: textarea
+    id: azure-metrics
+    attributes:
+      label: Azure Metrics
+      description: Relevant Azure service metrics and diagnostics
+      placeholder: |
+        App Service Plan: B3
+        - CPU percentage: 85%
+        - Memory percentage: 75%
+        - HTTP queue length: 25
+        - Response time: 3.2s average
+
+        Service Bus:
+        - Message count: 1500
+        - Dead letter count: 10
+        - Processing time: 30s average
+    validations:
+      required: false
+
+  - type: textarea
+    id: impact-assessment
+    attributes:
+      label: Impact Assessment
+      description: What is the impact on users and business operations?
+      placeholder: |
+        - Number of affected participants/customers
+        - Impact on interview completion rates
+        - Business/revenue impact
+        - User experience degradation
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Any additional context about the performance issue
+      placeholder: |
+        - Recent code deployments
+        - Infrastructure changes
+        - Traffic patterns
+        - Related performance issues
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Verification
+      description: Please verify the following
+      options:
+        - label: I have searched existing issues to ensure this performance issue hasn't been reported before
+          required: true
+        - label: I have included relevant performance metrics and system resource usage
+          required: true
+        - label: I have tested this against the target load requirements (6000 concurrent users)
+          required: false
+        - label: I have checked Azure Application Insights and MongoDB Atlas metrics
+          required: false
