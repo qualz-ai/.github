@@ -1,0 +1,317 @@
+name: 🤖 AI Quality Issue
+description: Report issues with AI quality in data collection or analysis processes
+title: "[AI QUALITY] "
+labels: ["ai-quality", "llm", "data-analysis", "data-collection"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting an AI quality issue! This template is for problems with AI performance, accuracy, or unexpected behavior in QualZ's data collection and analysis processes.
+
+  - type: textarea
+    id: quality-issue-description
+    attributes:
+      label: AI Quality Issue Description
+      description: Describe the AI quality problem you're experiencing.
+      placeholder: Provide a clear description of the AI quality issue...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: ai-process-type
+    attributes:
+      label: AI Process Type
+      description: Which AI process is experiencing quality issues?
+      options:
+        - Data Collection (AI-moderated interviews)
+        - Data Analysis (sentiment, themes, insights)
+        - Both Data Collection and Analysis
+        - Other AI Process
+    validations:
+      required: true
+
+  - type: dropdown
+    id: ai-function
+    attributes:
+      label: Specific AI Function
+      description: Which specific AI function has quality issues?
+      multiple: true
+      options:
+        - Interview Question Generation
+        - Participant Response Understanding
+        - Follow-up Question Logic
+        - Interview Flow Management
+        - Sentiment Analysis
+        - Theme Extraction
+        - Data Summarization
+        - Report Generation
+        - Response Categorization
+        - Content Moderation
+        - Language Processing
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-you-tried
+    attributes:
+      label: What You Tried
+      description: Describe what you attempted to do with the AI system.
+      placeholder: |
+        - Configured interview with specific parameters
+        - Set up analysis with particular settings
+        - Used specific prompts or instructions
+        - Applied certain data filters
+        - Attempted specific AI workflows
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-functionality
+    attributes:
+      label: Expected Functionality
+      description: What did you expect the AI to do or produce?
+      placeholder: |
+        - Expected interview flow and question types
+        - Expected analysis accuracy and insights
+        - Expected response quality and relevance
+        - Expected data categorization or themes
+        - Expected output format and content
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: obtained-result
+    attributes:
+      label: Obtained Result
+      description: What did the AI actually do or produce? (Remove any sensitive participant data)
+      placeholder: |
+        - Actual interview behavior and questions generated
+        - Actual analysis results and accuracy
+        - Actual response quality and issues
+        - Actual categorization or theme extraction
+        - Actual output format and problems
+      render: markdown
+    validations:
+      required: true
+
+  - type: dropdown
+    id: quality-issue-type
+    attributes:
+      label: Quality Issue Type
+      description: What type of quality issue is this?
+      multiple: true
+      options:
+        - Inaccurate Results
+        - Irrelevant Responses
+        - Inconsistent Behavior
+        - Poor Context Understanding
+        - Inappropriate Content Generation
+        - Missing Key Insights
+        - Incorrect Categorization
+        - Low Confidence Scores
+        - Hallucination/Fabricated Information
+        - Language/Grammar Issues
+        - Bias in Results
+        - Performance Degradation
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: study-context
+    attributes:
+      label: Study/Data Context
+      description: What type of study or data was involved?
+      placeholder: e.g., customer satisfaction survey, product feedback interviews, market research
+    validations:
+      required: false
+
+  - type: input
+    id: data-volume
+    attributes:
+      label: Data Volume
+      description: How much data was processed?
+      placeholder: e.g., 50 interviews, 500 responses, 1000 data points
+    validations:
+      required: false
+
+  - type: dropdown
+    id: language
+    attributes:
+      label: Language
+      description: What language was being processed?
+      options:
+        - English
+        - Spanish
+        - French
+        - German
+        - Portuguese
+        - Italian
+        - Chinese
+        - Japanese
+        - Korean
+        - Arabic
+        - Hindi
+        - Other
+        - Multiple Languages
+    validations:
+      required: false
+
+  - type: textarea
+    id: ai-configuration
+    attributes:
+      label: AI Configuration/Settings
+      description: What AI settings or configuration were used? (Remove API keys)
+      placeholder: |
+        LLM Configuration:
+        - Model: GPT-4, Claude, etc.
+        - Temperature: 0.7
+        - Max tokens: 2000
+        - System prompts: [describe general approach]
+        - Custom instructions: [if any]
+
+        Analysis Settings:
+        - Analysis type: sentiment + themes
+        - Confidence threshold: 0.8
+        - Language model: multilingual
+      render: yaml
+    validations:
+      required: false
+
+  - type: dropdown
+    id: consistency
+    attributes:
+      label: Consistency
+      description: Is this issue consistent or intermittent?
+      options:
+        - Always happens (100%)
+        - Usually happens (>75%)
+        - Sometimes happens (25-75%)
+        - Rarely happens (<25%)
+        - Happened once
+        - Inconsistent pattern
+    validations:
+      required: true
+
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Environment
+      description: Which environment did this occur in?
+      options:
+        - dev
+        - dev01
+        - staging
+        - production
+        - local
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Quality Impact Severity
+      description: How severe is this AI quality issue?
+      options:
+        - Low - Minor quality degradation, acceptable results
+        - Medium - Noticeable quality issues affecting usability
+        - High - Significant quality problems impacting reliability
+        - Critical - AI producing unusable or harmful results
+    validations:
+      required: true
+
+  - type: textarea
+    id: examples
+    attributes:
+      label: Specific Examples
+      description: Provide specific examples of the quality issue (anonymize sensitive data)
+      placeholder: |
+        Example 1:
+        Input: [describe input]
+        Expected: [what should happen]
+        Actual: [what actually happened]
+
+        Example 2:
+        Input: [describe input]
+        Expected: [what should happen]
+        Actual: [what actually happened]
+      render: markdown
+    validations:
+      required: false
+
+  - type: textarea
+    id: impact-assessment
+    attributes:
+      label: Impact Assessment
+      description: How does this quality issue impact users and business operations?
+      placeholder: |
+        - Impact on data collection quality and reliability
+        - Impact on analysis accuracy and insights
+        - Impact on customer trust and satisfaction
+        - Impact on research validity and conclusions
+        - Business/operational impact
+      render: markdown
+    validations:
+      required: false
+
+  - type: textarea
+    id: workaround
+    attributes:
+      label: Workaround Applied
+      description: Any workarounds or manual corrections applied?
+      placeholder: |
+        - Manual review and correction of AI outputs
+        - Adjusted AI parameters or settings
+        - Used alternative analysis methods
+        - Implemented additional validation steps
+      render: markdown
+    validations:
+      required: false
+
+  - type: textarea
+    id: improvement-suggestions
+    attributes:
+      label: Improvement Suggestions
+      description: Do you have suggestions for improving the AI quality?
+      placeholder: |
+        - Suggested prompt improvements
+        - Recommended parameter adjustments
+        - Additional training or fine-tuning needs
+        - Better validation or quality checks
+        - Alternative AI approaches
+      render: markdown
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Any additional context about the AI quality issue
+      placeholder: |
+        - Recent changes in AI model or configuration
+        - Comparison with previous AI performance
+        - Related quality issues or patterns
+        - External factors that might affect AI quality
+      render: markdown
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Verification
+      description: Please verify the following
+      options:
+        - label: I have searched existing issues to ensure this AI quality issue hasn't been reported before
+          required: true
+        - label: I have removed or anonymized all sensitive participant data and personal information
+          required: true
+        - label: I have provided specific examples of the quality issue with expected vs actual results
+          required: true
+        - label: I have tested this across multiple data samples/scenarios to confirm the quality issue
+          required: false
